@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_API_URL } from '@shared/api/config.ts';
+import { BASE_API_URL } from './config.ts';
 
 export const HttpClient = axios.create({
   baseURL: BASE_API_URL,
