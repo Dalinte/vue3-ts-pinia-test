@@ -8,3 +8,7 @@
     </a>
   </div>
 </template>
+
+<script setup lang="ts">
+import './styles/style.css'
+</script>
