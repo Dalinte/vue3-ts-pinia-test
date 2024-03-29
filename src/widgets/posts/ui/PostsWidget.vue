@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
+import { DeletePostModal } from '@features/deletePost';
 import { postModel } from '@entities/post';
 
 const headers = [
-  { title: 'Id', key: 'id' },
-  { title: 'Title', key: 'title' },
-  { title: 'Body', key: 'body' },
+  { title: '№', key: 'id' },
+  { title: 'Заголовок', key: 'title' },
+  { title: 'Текст', key: 'body' },
   { title: '', key: 'edit' },
   { title: '', key: 'delete' },
 ];
 
 const postsStore = postModel.usePostsStore();
+
+onMounted(postsStore.fetchPosts);
 </script>
 
 <template>
@@ -20,7 +24,9 @@ const postsStore = postModel.usePostsStore();
     height="400"
   >
     <template #[`item.edit`]> Редактировать </template>
-    <template #[`item.delete`]> Удалить </template>
+    <template #[`item.delete`]="{ item }">
+      <DeletePostModal :id="item.id" />
+    </template>
   </v-data-table-virtual>
 </template>
 

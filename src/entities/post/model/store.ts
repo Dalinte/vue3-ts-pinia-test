@@ -5,13 +5,17 @@ import { IPost } from './types.ts';
 
 const namespace = 'posts';
 
+// Т.к. удалить или изменить данные в jsonplaceholder апи нельзя, то
+// в usePostsStore методы вызывают апи и добавляют фейковую логику изменения данных на фронте
 export const usePostsStore = defineStore(namespace, () => {
   const posts = ref<IPost[]>([]);
 
-  const getPosts = postApi.getPosts().then((response) => {
-    posts.value = response.data;
-    return response.data;
-  });
+  const fetchPosts = async () => {
+    return postApi.getPosts().then((response) => {
+      posts.value = response.data;
+      return response.data;
+    });
+  };
 
   const createPost = async (props: postApi.ICreatePostProps) => {
     return postApi.createPost(props).then((response) => {
@@ -31,14 +35,14 @@ export const usePostsStore = defineStore(namespace, () => {
   const deletePost = async (postId: number) => {
     return postApi.deletePost(postId).then((response) => {
       const index = posts.value.findIndex((item) => item.id === postId);
-      posts.value = posts.value.splice(index, 1);
+      posts.value.splice(index, 1);
       return response.data;
     });
   };
 
   return {
     posts,
-    getPosts,
+    fetchPosts,
     createPost,
     updatePost,
     deletePost,
