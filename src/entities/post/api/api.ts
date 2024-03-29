@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { postModel } from '@entities/post';
-import { ICreatePostProps } from '@entities/post/api/types.ts';
 import { HttpClient } from '@shared/api';
+import { ICreatePostProps } from './types.ts';
 
 export const getPosts = async (): Promise<AxiosResponse<postModel.IPost[]>> => {
   return HttpClient.get('/posts');

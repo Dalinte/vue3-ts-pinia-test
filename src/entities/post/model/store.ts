@@ -13,26 +13,26 @@ export const usePostsStore = defineStore(namespace, () => {
     return response.data;
   });
 
-  const createPost = (props: postApi.ICreatePostProps) => {
+  const createPost = async (props: postApi.ICreatePostProps) => {
     return postApi.createPost(props).then((response) => {
       posts.value.unshift(response.data);
       return response.data;
     });
   };
 
-  const updatePost = (post: IPost) => {
-    postApi.updatePost(post).then((response) => {
+  const updatePost = async (post: IPost) => {
+    return postApi.updatePost(post).then((response) => {
       const index = posts.value.findIndex((item) => item.id === post.id);
       posts.value[index] = response.data;
       return response.data;
     });
   };
 
-  const deletePost = (postId: number) => {
-    postApi.deletePost(postId).then(() => {
+  const deletePost = async (postId: number) => {
+    return postApi.deletePost(postId).then((response) => {
       const index = posts.value.findIndex((item) => item.id === postId);
       posts.value = posts.value.splice(index, 1);
-      return posts.value;
+      return response.data;
     });
   };
 
