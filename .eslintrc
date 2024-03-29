@@ -4,8 +4,11 @@
     "node": true,
     "browser": true
   },
-  "parser": "@typescript-eslint/parser",
+  "parser": "vue-eslint-parser",
   "plugins": ["@typescript-eslint", "boundaries"],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser"
+  },
   "settings": {
     "import/resolver": {
       "typescript": {
