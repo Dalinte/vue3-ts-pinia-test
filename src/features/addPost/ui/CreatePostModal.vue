@@ -2,10 +2,10 @@
 import { ref } from 'vue';
 import { postModel } from '@entities/post';
 import { postApi } from '@entities/post';
-import { useIsLoading, useValidations } from '@shared/lib';
+import { useIsLoading, useModal, useValidations } from '@shared/lib';
 
 const formValid = ref(false);
-const isShow = ref(false);
+const { isShow, closeModal } = useModal(false);
 const { isLoading, startLoading, finishLoading } = useIsLoading();
 const { required } = useValidations();
 const post = ref<postApi.ICreatePostProps>({
@@ -24,7 +24,7 @@ const handlerFormSubmit = () => {
   startLoading();
 
   store.createPost(post.value).finally(() => {
-    isShow.value = false;
+    closeModal();
     finishLoading();
     resetPost();
   });

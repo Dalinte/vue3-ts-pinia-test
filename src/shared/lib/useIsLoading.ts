@@ -3,8 +3,8 @@ import { ref } from 'vue';
 
 interface IUseIsLoading {
   isLoading: Ref<boolean>;
-  startLoading: () => void;
-  finishLoading: () => void;
+  startLoading(): void;
+  finishLoading(): void;
 }
 
 export function useIsLoading(init = false): IUseIsLoading {

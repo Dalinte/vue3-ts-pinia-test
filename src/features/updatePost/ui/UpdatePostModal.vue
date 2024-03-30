@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { postModel } from '@entities/post';
-import { useIsLoading, useValidations } from '@shared/lib';
+import { useIsLoading, useModal, useValidations } from '@shared/lib';
 
 const props = defineProps<{
   post: postModel.IPost;
 }>();
 
 const formValid = ref(false);
-const isShow = ref(false);
+const { isShow, closeModal } = useModal(false);
 const { isLoading, startLoading, finishLoading } = useIsLoading();
 const post = reactive({ ...props.post });
 const { required } = useValidations();
@@ -18,7 +18,7 @@ const handlerFormSubmit = () => {
   startLoading();
 
   store.updatePost(post).finally(() => {
-    isShow.value = false;
+    closeModal();
     finishLoading();
   });
 };
