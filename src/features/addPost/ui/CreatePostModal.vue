@@ -1,19 +1,26 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref } from 'vue';
 import { postModel } from '@entities/post';
-
-const props = defineProps<{
-  post: postModel.IPost;
-}>();
+import { postApi } from '@entities/post';
 
 const isShow = ref(false);
-const localPost = reactive({ ...props.post });
+const post = ref<postApi.ICreatePostProps>({
+  body: '',
+  title: '',
+  userId: 1,
+});
+
+const resetPost = () => {
+  post.value.title = '';
+  post.value.body = '';
+};
 
 const handlerUpdateClick = () => {
   const store = postModel.usePostsStore();
 
-  store.updatePost(localPost).finally(() => {
+  store.createPost(post.value).finally(() => {
     isShow.value = false;
+    resetPost();
   });
 };
 </script>
@@ -24,21 +31,23 @@ const handlerUpdateClick = () => {
       <template #activator="{ props: activatorProps }">
         <v-btn
           v-bind="activatorProps"
-          icon="mdi-pencil"
+          prepend-icon="mdi-plus-circle"
           variant="text"
           color="grey-darken-2"
-        ></v-btn>
+        >
+          Добавить пост
+        </v-btn>
       </template>
 
-      <v-card prepend-icon="mdi-note-text" title="Изменения поста">
+      <v-card prepend-icon="mdi-note-text" title="Добавление поста">
         <template #text>
           <v-text-field
-            v-model="localPost.title"
+            v-model="post.title"
             label="Заголовок"
             variant="outlined"
           ></v-text-field>
           <v-textarea
-            v-model="localPost.body"
+            v-model="post.body"
             label="Текст"
             variant="outlined"
           ></v-textarea>

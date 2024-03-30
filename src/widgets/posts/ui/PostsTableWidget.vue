@@ -34,4 +34,8 @@ onMounted(postsStore.fetchPosts);
   </v-data-table-virtual>
 </template>
 
-<style scoped></style>
+<style scoped>
+:deep(.v-data-table__td) {
+  text-align: start;
+}
+</style>

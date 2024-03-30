@@ -1,1 +1,1 @@
-export { default as PostsWidget } from './PostsWidget.vue';
+export { default as PostsTableWidget } from './PostsTableWidget.vue';

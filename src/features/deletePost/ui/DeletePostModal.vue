@@ -22,13 +22,13 @@ const handlerDeleteClick = () => {
       <template #activator="{ props: activatorProps }">
         <v-btn
           v-bind="activatorProps"
-          icon="$delete"
+          icon="mdi-trash-can-outline"
           variant="text"
           color="red"
         ></v-btn>
       </template>
 
-      <v-card prepend-icon="mdi-account" title="Подтверждение действия">
+      <v-card prepend-icon="mdi-note-text" title="Подтверждение действия">
         <v-divider></v-divider>
         <template #text>
           <div class="text-medium-emphasis mb-4 mt-2">
