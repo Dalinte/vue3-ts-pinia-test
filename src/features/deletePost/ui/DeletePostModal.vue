@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { postModel } from '@entities/post';
+import { useIsLoading } from '@shared/lib';
 
 const isShow = ref(false);
-const isLoading = ref(false);
+const { isLoading, startLoading, finishLoading } = useIsLoading();
 
 const props = defineProps<{
   id: number;
@@ -11,11 +12,11 @@ const props = defineProps<{
 
 const handlerDeleteClick = () => {
   const store = postModel.usePostsStore();
-  isLoading.value = true;
+  startLoading();
 
   store.deletePost(props.id).finally(() => {
     isShow.value = false;
-    isLoading.value = false;
+    finishLoading();
   });
 };
 </script>

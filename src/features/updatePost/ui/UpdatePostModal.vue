@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 import { postModel } from '@entities/post';
+import { useIsLoading } from '@shared/lib';
 
 const props = defineProps<{
   post: postModel.IPost;
 }>();
 
 const isShow = ref(false);
-const isLoading = ref(false);
+const { isLoading, startLoading, finishLoading } = useIsLoading();
 const post = reactive({ ...props.post });
 
 const handlerUpdateClick = () => {
   const store = postModel.usePostsStore();
-  isLoading.value = true;
+  startLoading();
 
   store.updatePost(post).finally(() => {
     isShow.value = false;
-    isLoading.value = false;
+    finishLoading();
   });
 };
 </script>

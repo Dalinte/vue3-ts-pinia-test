@@ -2,9 +2,10 @@
 import { ref } from 'vue';
 import { postModel } from '@entities/post';
 import { postApi } from '@entities/post';
+import { useIsLoading } from '@shared/lib';
 
 const isShow = ref(false);
-const isLoading = ref(false);
+const { isLoading, startLoading, finishLoading } = useIsLoading();
 const post = ref<postApi.ICreatePostProps>({
   body: '',
   title: '',
@@ -18,11 +19,11 @@ const resetPost = () => {
 
 const handlerUpdateClick = () => {
   const store = postModel.usePostsStore();
-  isLoading.value = true;
+  startLoading();
 
   store.createPost(post.value).finally(() => {
     isShow.value = false;
-    isLoading.value = false;
+    finishLoading();
     resetPost();
   });
 };
