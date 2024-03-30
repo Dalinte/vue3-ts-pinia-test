@@ -1,9 +1,35 @@
-# Vue 3 + TypeScript + Vite
+# Тестовое задание (Vue 3 + TypeScript)[`DEMO`](https://dalinte.github.io/vue3-ts-pinia-test/)
+Цель: Продемонстрировать навыки владения Vue 3, TypeScript, а также опыт работы с API и CRUD-операциями.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## ТЗ
+Разработать веб-приложение, которое позволяет:
+- Отображать список постов, полученный с помощью API JSONPlaceholder: https://jsonplaceholder.typicode.com/posts.
+- Добавлять новых постов.
+- Редактировать информацию о существующих постах.
+- Удалять посты.
 
-## Recommended Setup
+## Technology stack
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+- **Framework**: [`vue 3`](https://vuejs.org/)
+- **Lang**: [`typescript`](https://www.typescriptlang.org/)
+- **UI**: [`vuetify`](https://vuetifyjs.com/)
+- **Store**: [`pinia`](https://pinia.vuejs.org/)
+- **Data fetching**: [`axios`](https://axios-http.com/)
+- **Lint**: [`eslint`](https://eslint.org/), [`prettier`](https://prettier.io/)
+- **Architecture**: [`feature-sliced`](https://feature-sliced.design/)
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+<details>
+<summary>Дополнительные функции</summary>
+
+- Показ уведомлений об успешных действиях или ошибках после вызова апи (toast)
+- Валидация форм: поля в формах обязательные
+</details>
+
+<details>
+<summary>Что можно улучшить</summary>
+
+- Модальные окна вынести в modal-provider, где контент отделен от логики открытия
+- Т.к страница всего одна, то в ней находится layout. При vue-router и других страниц это можно вынести
+- При добавлении поста приходит id=101. Если попытаться отредактировать, то возвращается ошибка. Как раз пригодится для демонстрации toast с типом error
+</details>
+
