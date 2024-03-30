@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { postModel } from '@entities/post';
 
 const isShow = ref(false);
+const isLoading = ref(false);
 
 const props = defineProps<{
   id: number;
@@ -10,8 +11,11 @@ const props = defineProps<{
 
 const handlerDeleteClick = () => {
   const store = postModel.usePostsStore();
+  isLoading.value = true;
+
   store.deletePost(props.id).finally(() => {
     isShow.value = false;
+    isLoading.value = false;
   });
 };
 </script>
@@ -38,7 +42,12 @@ const handlerDeleteClick = () => {
       <template #actions>
         <v-spacer></v-spacer>
         <v-btn @click="isShow = false">Отменить</v-btn>
-        <v-btn color="red" variant="tonal" @click="handlerDeleteClick">
+        <v-btn
+          :loading="isLoading"
+          color="red"
+          variant="tonal"
+          @click="handlerDeleteClick"
+        >
           Удалить
         </v-btn>
       </template>

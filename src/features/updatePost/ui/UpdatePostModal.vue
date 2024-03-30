@@ -7,13 +7,16 @@ const props = defineProps<{
 }>();
 
 const isShow = ref(false);
-const localPost = reactive({ ...props.post });
+const isLoading = ref(false);
+const post = reactive({ ...props.post });
 
 const handlerUpdateClick = () => {
   const store = postModel.usePostsStore();
+  isLoading.value = true;
 
-  store.updatePost(localPost).finally(() => {
+  store.updatePost(post).finally(() => {
     isShow.value = false;
+    isLoading.value = false;
   });
 };
 </script>
@@ -32,12 +35,12 @@ const handlerUpdateClick = () => {
     <v-card prepend-icon="mdi-note-text" title="Изменения поста">
       <template #text>
         <v-text-field
-          v-model="localPost.title"
+          v-model="post.title"
           label="Заголовок"
           variant="outlined"
         ></v-text-field>
         <v-textarea
-          v-model="localPost.body"
+          v-model="post.body"
           label="Текст"
           variant="outlined"
         ></v-textarea>
@@ -49,6 +52,7 @@ const handlerUpdateClick = () => {
         <v-spacer></v-spacer>
         <v-btn text="Закрыть" variant="plain" @click="isShow = false"></v-btn>
         <v-btn
+          :loading="isLoading"
           color="primary"
           text="Сохранить"
           variant="tonal"

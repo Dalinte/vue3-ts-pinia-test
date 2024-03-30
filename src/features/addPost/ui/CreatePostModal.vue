@@ -4,6 +4,7 @@ import { postModel } from '@entities/post';
 import { postApi } from '@entities/post';
 
 const isShow = ref(false);
+const isLoading = ref(false);
 const post = ref<postApi.ICreatePostProps>({
   body: '',
   title: '',
@@ -17,9 +18,11 @@ const resetPost = () => {
 
 const handlerUpdateClick = () => {
   const store = postModel.usePostsStore();
+  isLoading.value = true;
 
   store.createPost(post.value).finally(() => {
     isShow.value = false;
+    isLoading.value = false;
     resetPost();
   });
 };
@@ -58,6 +61,7 @@ const handlerUpdateClick = () => {
         <v-spacer></v-spacer>
         <v-btn text="Закрыть" variant="plain" @click="isShow = false"></v-btn>
         <v-btn
+          :loading="isLoading"
           color="primary"
           text="Сохранить"
           variant="tonal"
