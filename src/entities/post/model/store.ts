@@ -1,7 +1,9 @@
+import type { AxiosRequestConfig } from 'axios';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { postApi } from '@entities/post';
-import { IPost } from './types.ts';
+import { successNotifications } from './notifications.ts';
+import type { IPost } from './types.ts';
 
 const namespace = 'posts';
 
@@ -18,14 +20,26 @@ export const usePostsStore = defineStore(namespace, () => {
   };
 
   const createPost = async (props: postApi.ICreatePostProps) => {
-    return postApi.createPost(props).then((response) => {
+    const config: AxiosRequestConfig = {
+      notification: {
+        text: successNotifications['createPost'],
+      },
+    };
+
+    return postApi.createPost(props, config).then((response) => {
       posts.value.unshift(response.data);
       return response.data;
     });
   };
 
   const updatePost = async (post: IPost) => {
-    return postApi.updatePost(post).then((response) => {
+    const config: AxiosRequestConfig = {
+      notification: {
+        text: successNotifications['updatePost'],
+      },
+    };
+
+    return postApi.updatePost(post, config).then((response) => {
       const index = posts.value.findIndex((item) => item.id === post.id);
       posts.value[index] = response.data;
       return response.data;
@@ -33,7 +47,13 @@ export const usePostsStore = defineStore(namespace, () => {
   };
 
   const deletePost = async (postId: number) => {
-    return postApi.deletePost(postId).then((response) => {
+    const config: AxiosRequestConfig = {
+      notification: {
+        text: successNotifications['deletePost'],
+      },
+    };
+
+    return postApi.deletePost(postId, config).then((response) => {
       const index = posts.value.findIndex((item) => item.id === postId);
       posts.value.splice(index, 1);
       return response.data;
