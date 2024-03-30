@@ -9,8 +9,8 @@ const isShow = ref(false);
 const { isLoading, startLoading, finishLoading } = useIsLoading();
 const { required } = useValidations();
 const post = ref<postApi.ICreatePostProps>({
-  body: '',
-  title: '',
+  body: 'Текст',
+  title: 'Заголовок',
   userId: 1,
 });
 

@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
+  base: '/vue3-ts-pinia-test', // route по названию репозитория для заливки на github pages
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
