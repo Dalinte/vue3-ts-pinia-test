@@ -9,7 +9,7 @@
 - Удалять посты.
 
 <details>
-<summary>Полное ТЗ</summary>
+<summary>Смотреть полностью</summary>
 
 #### Требования:
 - Фреймворк: Vue 3
@@ -52,7 +52,7 @@
 - **Lint**: [`eslint`](https://eslint.org/), [`prettier`](https://prettier.io/)
 - **Architecture**: [`feature-sliced`](https://feature-sliced.design/)
 
-Тестировал на
+Node version:
 - **Node.js v20**
 
 <details>
