@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import { VDataTableVirtual } from 'vuetify/components';
 import { DeletePostModal } from '@features/deletePost';
+import { UpdatePostModal } from '@features/updatePost';
 import { postModel } from '@entities/post';
 
-const headers = [
-  { title: '№', key: 'id' },
-  { title: 'Заголовок', key: 'title' },
-  { title: 'Текст', key: 'body' },
-  { title: '', key: 'edit' },
-  { title: '', key: 'delete' },
+const headers: VDataTableVirtual['headers'] = [
+  { title: '№', key: 'id', sortable: false },
+  { title: 'Заголовок', key: 'title', sortable: false },
+  { title: 'Текст', key: 'body', sortable: false },
+  { title: '', key: 'edit', sortable: false },
+  { title: '', key: 'delete', sortable: false },
 ];
 
 const postsStore = postModel.usePostsStore();

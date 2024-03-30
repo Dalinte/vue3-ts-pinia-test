@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps } from 'vue';
+import { ref } from 'vue';
 import { postModel } from '@entities/post';
 
 const isShow = ref(false);
@@ -28,10 +28,7 @@ const handlerDeleteClick = () => {
         ></v-btn>
       </template>
 
-      <v-card>
-        <template #title>
-          <div class="text-h5 text-medium-emphasis">Подтверждение действия</div>
-        </template>
+      <v-card prepend-icon="mdi-account" title="Подтверждение действия">
         <v-divider></v-divider>
         <template #text>
           <div class="text-medium-emphasis mb-4 mt-2">
