@@ -17,33 +17,31 @@ const handlerDeleteClick = () => {
 </script>
 
 <template>
-  <div class="text-center pa-4">
-    <v-dialog v-model="isShow" max-width="400">
-      <template #activator="{ props: activatorProps }">
-        <v-btn
-          v-bind="activatorProps"
-          icon="mdi-trash-can-outline"
-          variant="text"
-          color="red"
-        ></v-btn>
+  <v-dialog v-model="isShow" max-width="400">
+    <template #activator="{ props: activatorProps }">
+      <v-btn
+        v-bind="activatorProps"
+        icon="mdi-trash-can-outline"
+        variant="text"
+        color="red"
+      ></v-btn>
+    </template>
+
+    <v-card prepend-icon="mdi-note-text" title="Подтверждение действия">
+      <v-divider></v-divider>
+      <template #text>
+        <div class="text-medium-emphasis mb-4 mt-2">
+          Вы действительно хотите удалить пост №{{ props.id }}?
+        </div>
       </template>
 
-      <v-card prepend-icon="mdi-note-text" title="Подтверждение действия">
-        <v-divider></v-divider>
-        <template #text>
-          <div class="text-medium-emphasis mb-4 mt-2">
-            Вы действительно хотите удалить пост №{{ props.id }}?
-          </div>
-        </template>
-
-        <template #actions>
-          <v-spacer></v-spacer>
-          <v-btn @click="isShow = false">Отменить</v-btn>
-          <v-btn color="red" variant="tonal" @click="handlerDeleteClick">
-            Удалить
-          </v-btn>
-        </template>
-      </v-card>
-    </v-dialog>
-  </div>
+      <template #actions>
+        <v-spacer></v-spacer>
+        <v-btn @click="isShow = false">Отменить</v-btn>
+        <v-btn color="red" variant="tonal" @click="handlerDeleteClick">
+          Удалить
+        </v-btn>
+      </template>
+    </v-card>
+  </v-dialog>
 </template>

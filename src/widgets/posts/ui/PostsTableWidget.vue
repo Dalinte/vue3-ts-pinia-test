@@ -26,10 +26,14 @@ onMounted(postsStore.fetchPosts);
     height="400"
   >
     <template #[`item.edit`]="{ item }">
-      <UpdatePostModal :post="item" />
+      <div class="pa-3">
+        <UpdatePostModal :post="item" />
+      </div>
     </template>
     <template #[`item.delete`]="{ item }">
-      <DeletePostModal :id="item.id" />
+      <div class="pa-3">
+        <DeletePostModal :id="item.id" />
+      </div>
     </template>
   </v-data-table-virtual>
 </template>
