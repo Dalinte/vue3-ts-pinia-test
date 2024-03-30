@@ -34,12 +34,12 @@ onMounted(() => {
   >
     <template #[`item.edit`]="{ item }">
       <div class="pa-3">
-        <UpdatePostModal :post="item" />
+        <update-post-modal :post="item" />
       </div>
     </template>
     <template #[`item.delete`]="{ item }">
       <div class="pa-3">
-        <DeletePostModal :id="item.id" />
+        <delete-post-modal :id="item.id" />
       </div>
     </template>
   </v-data-table-virtual>

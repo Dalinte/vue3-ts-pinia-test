@@ -1,13 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { postModel } from '@entities/post';
+import { PostForm, postModel } from '@entities/post';
 import { postApi } from '@entities/post';
-import { useIsLoading, useModal, useValidations } from '@shared/lib';
+import { useIsLoading, useModal } from '@shared/lib';
 
-const formValid = ref(false);
 const { isShow, closeModal } = useModal(false);
 const { isLoading, startLoading, finishLoading } = useIsLoading();
-const { required } = useValidations();
 const post = ref<postApi.ICreatePostProps>({
   body: 'Текст',
   title: 'Заголовок',
@@ -19,11 +17,11 @@ const resetPost = () => {
   post.value.body = '';
 };
 
-const handlerFormSubmit = () => {
+const handleFormSubmit = (post: postApi.ICreatePostProps) => {
   const store = postModel.usePostsStore();
   startLoading();
 
-  store.createPost(post.value).finally(() => {
+  store.createPost(post).finally(() => {
     closeModal();
     finishLoading();
     resetPost();
@@ -44,39 +42,12 @@ const handlerFormSubmit = () => {
       </v-btn>
     </template>
 
-    <v-form v-model="formValid" @submit.prevent="handlerFormSubmit">
-      <v-card prepend-icon="mdi-note-text" title="Добавление поста">
-        <template #text>
-          <v-text-field
-            v-model="post.title"
-            label="Заголовок"
-            variant="outlined"
-            class="my-2"
-            :rules="[required]"
-          ></v-text-field>
-          <v-textarea
-            v-model="post.body"
-            label="Текст"
-            variant="outlined"
-            :rules="[required]"
-          ></v-textarea>
-        </template>
-
-        <v-divider></v-divider>
-
-        <template #actions>
-          <v-spacer></v-spacer>
-          <v-btn text="Закрыть" variant="plain" @click="isShow = false"></v-btn>
-          <v-btn
-            type="submit"
-            :disabled="!formValid"
-            :loading="isLoading"
-            color="primary"
-            text="Сохранить"
-            variant="tonal"
-          ></v-btn>
-        </template>
-      </v-card>
-    </v-form>
+    <post-form
+      title="Добавление поста"
+      :is-loading="isLoading"
+      :post="post"
+      @close="closeModal"
+      @submit="handleFormSubmit"
+    />
   </v-dialog>
 </template>

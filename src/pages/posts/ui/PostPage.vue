@@ -8,16 +8,14 @@ import { CreatePostModal } from '@features/addPost';
     <v-row>
       <v-col cols="12">
         <v-sheet class="pa-2 ma-2 d-flex justify-end">
-          <CreatePostModal />
+          <create-post-modal />
         </v-sheet>
       </v-col>
       <v-col cols="12">
         <v-sheet class="pa-2 ma-2">
-          <PostsTableWidget />
+          <posts-table-widget />
         </v-sheet>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
-<style scoped></style>
