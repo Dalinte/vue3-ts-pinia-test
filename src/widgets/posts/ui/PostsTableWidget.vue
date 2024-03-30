@@ -4,6 +4,7 @@ import { VDataTableVirtual } from 'vuetify/components';
 import { DeletePostModal } from '@features/deletePost';
 import { UpdatePostModal } from '@features/updatePost';
 import { postModel } from '@entities/post';
+import { useIsLoading } from '@shared/lib';
 
 const headers: VDataTableVirtual['headers'] = [
   { title: '№', key: 'id', sortable: false },
@@ -13,9 +14,14 @@ const headers: VDataTableVirtual['headers'] = [
   { title: '', key: 'delete', sortable: false },
 ];
 
+const { isLoading, startLoading, finishLoading } = useIsLoading();
+
 const postsStore = postModel.usePostsStore();
 
-onMounted(postsStore.fetchPosts);
+onMounted(() => {
+  startLoading();
+  postsStore.fetchPosts().finally(finishLoading);
+});
 </script>
 
 <template>
@@ -24,6 +30,7 @@ onMounted(postsStore.fetchPosts);
     :headers="headers"
     :items="postsStore.posts"
     height="400"
+    :loading="isLoading"
   >
     <template #[`item.edit`]="{ item }">
       <div class="pa-3">
