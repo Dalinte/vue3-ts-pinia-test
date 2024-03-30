@@ -23,7 +23,9 @@ onMounted(postsStore.fetchPosts);
     :items="postsStore.posts"
     height="400"
   >
-    <template #[`item.edit`]> Редактировать </template>
+    <template #[`item.edit`]="{ item }">
+      <UpdatePostModal :post="item" />
+    </template>
     <template #[`item.delete`]="{ item }">
       <DeletePostModal :id="item.id" />
     </template>
