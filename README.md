@@ -1,5 +1,5 @@
 # Тестовое задание (Vue 3 + TypeScript)[`Смотреть демо`](https://dalinte.github.io/vue3-ts-pinia-test/)
-Цель: Продемонстрировать навыки владения Vue 3, TypeScript, а также опыт работы с API и CRUD-операциями.
+**Цель**: Продемонстрировать навыки владения Vue 3, TypeScript, а также опыт работы с API и CRUD-операциями.
 
 ## ТЗ
 Разработать веб-приложение, которое позволяет:
@@ -50,7 +50,7 @@
 - **Store**: [`pinia`](https://pinia.vuejs.org/)
 - **Data fetching**: [`axios`](https://axios-http.com/)
 - **Lint**: [`eslint`](https://eslint.org/), [`prettier`](https://prettier.io/)
-- **Architecture**: [`feature-sliced`](https://feature-sliced.design/)
+- **Architecture**: [`feature-sliced`](https://feature-sliced.design/) Код специально разбит на множество файлов, чтобы продемонстрировать его дальнейшую расширяемость
 
 Node version:
 - **Node.js v20**
